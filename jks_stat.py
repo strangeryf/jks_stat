@@ -82,6 +82,6 @@ class JenkinsStat():
   
 if __name__=='__main__':
   jksstat=JenkinsStat('http://192.168.10.212:30080', 'admin', '1eb1a49aebf097541e3103e4f06c0dce')
-  groups = "AF00", "AF01", "AF02", "AF03", "AF04", "JR01"
+  groups = "GRP00", "GRP01", "GRP02", "GRP03"
   for group in groups:
     jksstat.group_stat(group)
