@@ -75,13 +75,21 @@ class JenkinsStat():
       grp_success += success
       grp_mttr += self.job_MTTR(job)
     print
-    print('Average build duration: %.1fs' % (duration/1000./build_count))
-    print('succesful build: %.1f%%' % (success*100./build_count))
+
+    if grp_build_count!=0:
+      print('Average build duration: %.1fs' % (grp_duration/1000./grp_build_count))
+      print('succesful build: %.1f%%' % (grp_success*100./grp_build_count))
+    else:
+      print('Average build duration: 0')
+      print('succesful build: 0')
     print('total build number: %d' % grp_build_count)
-    print('MTTR: %d' % (grp_mttr/len(group)))
+    if len(group)!=0:
+      print('MTTR: %dm' % (grp_mttr/len(group)))
+    else:
+      print('MTTR: 0')
   
 if __name__=='__main__':
-  jksstat=JenkinsStat('http://192.168.10.212:30080', 'admin', '1eb1a49aebf097541e3103e4f06c0dce')
+  jksstat=JenkinsStat('http://192.168.1.1:8080', 'admin', '1eb1a49aebf097541e3103e4f06c0dce')
   groups = "GRP00", "GRP01", "GRP02", "GRP03"
   for group in groups:
     jksstat.group_stat(group)
